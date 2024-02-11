@@ -1,0 +1,28 @@
+.card{
+    background-color : rgba(158, 182, 22, 0.932);
+    color            : rgb(24, 10, 10);
+    border           : 2px solid black;
+    border-radius    : 10px;    
+    box-sizing       : border-box;
+    position         : relative;
+    display          : flex;
+    flex-direction   : column;
+    justify-content  : center;
+    align-items      : center;
+    width            : 150px;
+    height           : 250px;
+    margin           : 5px;
+    padding          : 3px;
+
+    transition: all 0.3s ease;
+    box-shadow: -3px 0px 10px black;
+
+    h4{
+        margin: 1px;
+    }
+    
+    &:hover{
+        margin-right: 80px;
+        transform   : rotate(3deg) translateY(-15px);
+    }
+}

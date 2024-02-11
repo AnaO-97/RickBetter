@@ -1,0 +1,5 @@
+.contenedorFavoritos {
+  display: flex;
+  background-color: blue;
+  border: 2px solid red;
+}
