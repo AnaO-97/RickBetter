@@ -5,22 +5,23 @@ export default function SearchBar(props) {
 
    const handleChange = (event) =>{
       const idIngresado = event.target.value;
-      // console.log(idIngresado);
-
       setIdBuscar(idBuscar = idIngresado);
    }
 
    return (
       <div>
          <input 
-            type     = 'search'
+            type     = 'search'         
             onChange = {handleChange}
             value    = {idBuscar}
          />         
          
-         <button onClick={()=>props.onSearch(idBuscar)}>Agregar</button>
-
-         <button onClick={()=>props.onSearch(Math.floor(Math.random()*827))}>Aleatorio</button>
+         <button onClick={()=>props.onSearch(idBuscar)}>
+            ADD
+         </button>
+         <button onClick={()=>props.onSearch(Math.floor(Math.random()*827))}>
+            RANDOM
+         </button>
       </div>
    );
 }

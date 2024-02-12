@@ -30,6 +30,7 @@ form button{
     height: 40px;
     font-family: "Constantia";
     font-size: 20px;
+    font-weight: bold;
     border: solid 2px rgb(57, 206, 57);
     border-radius: 10px;
     background-image: linear-gradient(190deg, #2af598 0%, #009efd 100%);

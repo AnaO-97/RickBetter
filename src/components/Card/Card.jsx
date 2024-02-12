@@ -60,7 +60,7 @@ function Card(props) {
          </div>
 
          <img src   = {props.image} 
-              alt   = "imagen no cargó" 
+              alt   = "Error" 
               width = "100px"
          />
       </div>

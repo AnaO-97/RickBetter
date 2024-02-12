@@ -43,7 +43,6 @@ function App() {
 
    return (
       <div className='App'>                       
-         {(pathname==="/home")? <p>SWEET HOME</p>            : ""}
          {(pathname==="/home")? <Nav onSearch = {onSearch}/> : ""}
 
          <Routes>

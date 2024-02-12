@@ -52,10 +52,11 @@ export default function Form (props){
           })
           
           if (login(userData))
-            navigate('/home');
+                navigate('/home');
           else{
-           <DialogBoxLogin />
-           console.log("Temporarily register")
+                <DialogBoxLogin/>
+                alert("Temporarily register")
+                navigate('/home');
             }
         }
         else{

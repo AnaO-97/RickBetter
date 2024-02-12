@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 20px;
-  width: 100%;
+  /* border: solid 2px red; */
 }
 .contenedorCards [class*="card"] {
   margin-left: -50px;
