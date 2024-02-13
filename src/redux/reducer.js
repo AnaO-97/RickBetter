@@ -31,7 +31,7 @@ export function reducer (state = stateInicial, action){
         case 'FILTER':{
             const filtro = [...state.allCharacters]; 
             
-            if(payload === "TODOS"){
+            if(payload === "All"){
                 return({
                     ...state,
                     myFavorites   : filtro,

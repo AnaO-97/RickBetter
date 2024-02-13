@@ -5,7 +5,7 @@ import DialogBoxLogin from "./DialogBox";
 import { login } from "./functions";
 import validation from "./validation";
 
-export default function Form (props){
+export default function Form (){
     const navigate   = useNavigate();
 
     const [userData,setUserData] = useState({

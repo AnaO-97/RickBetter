@@ -2,7 +2,7 @@ import './App.css';
 import axios from 'axios'
 import { useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import Nav from './components/Nav_SearchBar/Nav';
+import NavBar from './components/Nav_SearchBar/NavBar';
 import Form from './components/Form/Form';
 import Cards from './components/Cards/Cards';
 import About from './components/About/About';
@@ -43,30 +43,35 @@ function App() {
 
    return (
       <div className='App'>                       
-         {(pathname==="/home")? <Nav onSearch = {onSearch}/> : ""}
+         {(pathname!=="/")
+            ? <NavBar onSearch = {onSearch}
+                      pathname = {pathname}
+               /> 
+            : ""         
+         }
 
          <Routes>
-            <Route path    = "/"
-                   element = {<Form/>}>
+            <Route exact path = "/"
+                   element    = {<Form/>}>
             </Route>
 
-            <Route path    = "/home"                   
-                   element = {<Cards
+            <Route exact path = "/home"                   
+                   element    = {<Cards
                                     characters = {characters}
                                     onClose    = {onClose}/>}>               
             </Route>           
            
-            <Route path    = "/about"
-                   element = {<About/>}>
+            <Route exact path = "/about"
+                   element    = {<About/>}>
             </Route>
 
-            <Route  path    ='/favorites'
-                    element = {<Favorites onClose = {onClose}/>}>
+            <Route  exact path ='/favorites'
+                    element    = {<Favorites onClose = {onClose}/>}>
                
             </Route>
 
-            <Route path    = "/detail/:detailId"
-                   element = {<Detail/>}>
+            <Route exact path = "/detail/:detailId"
+                   element    = {<Detail/>}>
             </Route>         
          </Routes>                
       </div>
