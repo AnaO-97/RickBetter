@@ -1,7 +1,9 @@
 import './App.css';
 import axios from 'axios'
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { addWanted, removeWanted } from './redux/actions';
 import NavBar from './components/Nav_SearchBar/NavBar';
 import Form from './components/Form/Form';
 import Cards from './components/Cards/Cards';
@@ -10,14 +12,15 @@ import Detail from './components/Detail/Detail';
 import Favorites from './components/Favorites/Favorites';
 
 function App() {
-   const [characters,setCharacters] = useState([]);
+   const [charactersWanted,setCharactersWanted] = useState([]);
    
    const {pathname} = useLocation(); 
+   const dispatch = useDispatch();
 
    function onSearch(enteredId) { 
       let isCharacter = false;
 
-      for (const character of characters) {
+      for (const character of charactersWanted) {
          if(character.id === parseInt(enteredId)){
             isCharacter = true;       
          }
@@ -29,7 +32,8 @@ function App() {
       else{
          axios(`https://rickandmortyapi.com/api/character/${enteredId}`).then(({ data }) => {
             if (data.name) {
-               setCharacters(() => [...characters, data]);
+               dispatch(addWanted(data))
+               setCharactersWanted(() => [...charactersWanted, data]);
             } else {
                window.alert('¡No hay personajes con este ID!');
             }
@@ -37,8 +41,9 @@ function App() {
       }
    }
 
-   function onClose(closeCharacter) {
-      setCharacters(characters.filter((character) => character.id !== parseInt(closeCharacter,10)))      
+   function onClose(idCharacter) {
+      dispatch(removeWanted(idCharacter));
+      setCharactersWanted(charactersWanted.filter((character) => character.id !== parseInt(idCharacter,10)))      
    }
 
    return (
@@ -46,6 +51,7 @@ function App() {
          {(pathname!=="/")
             ? <NavBar onSearch = {onSearch}
                       pathname = {pathname}
+                      charactersWanted = {charactersWanted}
                /> 
             : ""         
          }
@@ -57,8 +63,8 @@ function App() {
 
             <Route exact path = "/home"                   
                    element    = {<Cards
-                                    characters = {characters}
-                                    onClose    = {onClose}/>}>               
+                                    onClose          = {onClose}
+                                    charactersWanted = {charactersWanted} />}>
             </Route>           
            
             <Route exact path = "/about"

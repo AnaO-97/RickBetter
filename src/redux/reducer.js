@@ -1,56 +1,93 @@
 const stateInicial = {
+    auxiWanted       : [],
+    charactersWanted : [],
     myFavorites   : [],
-    allCharacters : [],
+    auxiFavorites : [],
 };
 
 export function reducer (state = stateInicial, action){
-    const {type,payload} = action;
+    const { type, payload } = action;
 
     switch (type) {
-        case 'ADD_FAV':{
-            const auxi = [...state.allCharacters, payload];
+        case 'ADD_WANTED':{
+            const auxi = [...state.auxiWanted, payload];
             return ({
-                // ... state,
-                allCharacters : auxi,
+                ...state,
+                auxiWanted : auxi,
+                charactersWanted : auxi
+            });
+        }
+
+        case 'ADD_FAV':{
+            const auxi = [...state.auxiFavorites, payload];
+            return ({
+                ... state,
+                auxiFavorites : auxi,
                 myFavorites   : auxi
             });
         }
         
         case 'REMOVE_FAV':{
-            let auxi = [...state.allCharacters].filter((personaje)=>{
+            let auxi = [...state.auxiFavorites].filter((personaje)=>{
                 return (personaje.id !== parseInt(payload,10))                    
             });
                         
             return({
                 ...state,
                 myFavorites   : auxi,
-                allCharacters : auxi,
+                auxiFavorites : auxi,
+            });
+        }
+
+        case 'REMOVE_WANTED':{
+            let auxi = [...state.auxiWanted].filter((personaje)=>{
+                return (personaje.id !== parseInt(payload,10))                    
+            });
+                        
+            return({
+                ...state,
+                auxiWanted       : auxi,
+                charactersWanted : auxi,
             });
         }
 
         case 'FILTER':{
-            const filtro = [...state.allCharacters]; 
-            
-            if(payload === "All"){
-                return({
-                    ...state,
-                    myFavorites   : filtro,
-                });                
+            let nameAuxi = "";
+            let nameCharacters = "";
+            const [ gender, pathname ] = payload;
+           
+            if(pathname === "/home"){
+                nameAuxi = "auxiWanted";
+                nameCharacters = "charactersWanted";
             }
 
-            else{
+            if(pathname === "/favorites"){
+                nameAuxi = "auxiFavorites";
+                nameCharacters = "myFavorites";
+            } 
+
+            let filterArray = [...state[nameAuxi]];            
+            
+            if(gender === "All"){                
                 return({
                     ...state,
-                    myFavorites   : filtro.filter((personaje)=>{
-                            return(personaje.gender === payload)
-                        }),
-                });
+                    [ nameCharacters ] : filterArray,
+                });                
             }
             
+            else{
+                filterArray = filterArray.filter((character)=>{
+                    return character.gender === gender
+                })                
+                return({
+                    ...state,
+                    [ nameCharacters ] : filterArray
+                });           
+            }
         }
 
         // case 'ORDER':{
-        //     const ordenadoRow = [...state.allCharacters];
+        //     const ordenadoRow = [...state.auxiFavorites];
             
         //     const ordenado = ordenadoRow.sort((pA,pB)=>{
         //         if(payload === "A"){
@@ -76,6 +113,6 @@ export function reducer (state = stateInicial, action){
         default:
             return({
                 ...state
-            });
+        });
     }
 }

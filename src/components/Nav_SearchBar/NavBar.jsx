@@ -1,34 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import styles from "./Navbar.module.css";
 import { filterCards, oderCards } from "../../redux/actions"
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
     
-export default function NavBar (props){
-    const { onSearch, pathname } = props;
-    const {  }
-    
+export default function NavBar (props){   
     const dispatch = useDispatch();
+    
+    const { onSearch, pathname } = props;
+    
+    let [optionsFilter, setOptionsFilter] = useState([]);
 
-    const optionsSelects = (pathnameLocation) => {
-        console.log(pathnameLocation);
-        
-    }
+    const characters = useSelector((state)=>{
+        if(pathname === "/home")
+            return state.auxiWanted;
+        if(pathname === "/favorites")
+            return state.auxiFavorites;
+    });
+
+    const optionsSelects = ()=>{
+        let auxiliary = []
+        let optionsRaw = [];
+        if(characters.length > 0){
+            characters.forEach((character)=>{                
+                optionsRaw.push(character.gender);
+            })
+        }
+        auxiliary = new Set(optionsRaw);
+        setOptionsFilter( [...auxiliary] );
+    }    
 
     const  handleOrder = (evento) => {        
         const { value } = evento.target;
-        dispatch(
-            oderCards(value)
-        );
+        dispatch(oderCards(value));
     }
     
     const  handleFilter = (evento) => {
         const { value } = evento.target;
-        dispatch(
-            filterCards(value)
-        )
+        dispatch(filterCards(value, pathname));
     }
+
+    useEffect(()=>{        
+        optionsSelects();
+    },[pathname, characters])
 
     return (
     <div className={styles.containerGeneral}>
@@ -65,10 +80,15 @@ export default function NavBar (props){
                         onChange = { handleFilter }
                 >
                     <option value = "All">        All       </option>
-                    <option value = "Male">       Male        </option>
-                    <option value = "Female">     Female      </option>
-                    <option value = "Genderless"> Genderless  </option>
-                    <option value = "unknown">    unknown     </option>
+                    {
+                        optionsFilter.map((gender, index)=>(
+                                    <option key={index}  value = {gender}> 
+                                        {gender[0].toUpperCase() + gender.substring(1)} 
+                                    </option> 
+                                )
+                            )
+                        
+                    }                   
                 </select>
             </div>
         </div>

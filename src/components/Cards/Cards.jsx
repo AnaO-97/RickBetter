@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import style from './Cards.module.css'
 
 export default function Cards(props) {  
-   const {characters} = props;
-   
+   const charactersWanted = useSelector((state)=>state.charactersWanted);
+
    return (      
       <div className = {style.contenedorCards}
       >
-         {characters.map((personaje)=>
+         {charactersWanted.length && 
+            charactersWanted.map((personaje)=>
                (                  
                   <Card                      
                      id      = {personaje.id}

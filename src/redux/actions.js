@@ -1,14 +1,30 @@
+const ADD_WANTED    = 'ADD_WANTED';
+const REMOVE_WANTED = 'REMOVE_WANTED';
+
 const ADD_FAV    = 'ADD_FAV';
 const REMOVE_FAV = 'REMOVE_FAV';
 
 const FILTER = 'FILTER';
 const ORDER  = 'ORDER';
 
+export function addWanted (character){
+    return({
+        type    : ADD_WANTED,
+        payload : character 
+    });
+}
 
-export function addFav (personaje){
+export function removeWanted (id){
+    return({
+        type    : REMOVE_WANTED,
+        payload : id
+    });
+}
+
+export function addFav (character){
     return({
         type    : ADD_FAV,
-        payload : personaje 
+        payload : character 
     });
 }
 
@@ -19,10 +35,10 @@ export function removeFav (id){
     });
 }
 
-export function filterCards (gender){
+export function filterCards (gender, pathname){
     return({
         type    : FILTER,
-        payload : gender
+        payload : [gender,pathname]
     });
 }
 
