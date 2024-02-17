@@ -21,7 +21,7 @@ export function reducer (state = stateInicial, action){
         case 'ADD_FAV':{
             const auxi = [...state.auxiFavorites, payload];
             return ({
-                ... state,
+                ...state,
                 auxiFavorites : auxi,
                 myFavorites   : auxi
             });
@@ -86,29 +86,47 @@ export function reducer (state = stateInicial, action){
             }
         }
 
-        // case 'ORDER':{
-        //     const ordenadoRow = [...state.auxiFavorites];
-            
-        //     const ordenado = ordenadoRow.sort((pA,pB)=>{
-        //         if(payload === "A"){
-        //             if(pA.id < pB.id) return -1;
-        //             if(pA.id > pB.id) return  1;
+        case 'ORDER':{
+            let nameAuxi = "";
+            let nameCharacters = "";
+            const [ orderBy, pathname ] = payload;
 
-        //             return 0;
-        //         }
-        //         if(payload === "B"){
-        //             if(pA.id > pB.id) return -1;
-        //             if(pA.id < pB.id) return  1;
+            if(pathname === "/home"){
+                nameAuxi = "auxiWanted";
+                nameCharacters = "charactersWanted";
+            }
 
-        //             return 0;
-        //         }                
-        //     });
+            if(pathname === "/favorites"){
+                nameAuxi = "auxiFavorites";
+                nameCharacters = "myFavorites";
+            }            
+
+            const orderRaw = [...state[ nameAuxi ]];
+        
+            const order = (orderBy !== "N/A" 
+                ? orderRaw.sort((pA,pB)=>{                
+                        if(orderBy === "Upward"){
+                            if(pA.id < pB.id) return -1;
+                            if(pA.id > pB.id) return  1;
+
+                            return 0;
+                        }
+                        if(orderBy === "Falling"){
+                            if(pA.id > pB.id) return -1;
+                            if(pA.id < pB.id) return  1;
+
+                            return 0;
+                        }            
+                        return 0;
+                    })
+                :  [ ...state[ nameCharacters ] ]
+            )
             
-        //     return({
-        //         ...state,
-        //         myFavorites : ordenado
-        //     });
-        // }
+            return({
+                ...state,
+                [ nameCharacters ] : order
+            });
+        }
     
         default:
             return({

@@ -1,7 +1,6 @@
 import './App.css';
-import axios from 'axios'
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { addWanted, removeWanted } from './redux/actions';
 import NavBar from './components/Nav_SearchBar/NavBar';
@@ -12,9 +11,9 @@ import Detail from './components/Detail/Detail';
 import Favorites from './components/Favorites/Favorites';
 
 function App() {
-   const [charactersWanted,setCharactersWanted] = useState([]);
+   const charactersWanted = useSelector((state)=>state.charactersWanted);
    
-   const {pathname} = useLocation(); 
+   const { pathname } = useLocation(); 
    const dispatch = useDispatch();
 
    function onSearch(enteredId) { 
@@ -33,7 +32,6 @@ function App() {
          axios(`https://rickandmortyapi.com/api/character/${enteredId}`).then(({ data }) => {
             if (data.name) {
                dispatch(addWanted(data))
-               setCharactersWanted(() => [...charactersWanted, data]);
             } else {
                window.alert('¡No hay personajes con este ID!');
             }
@@ -43,7 +41,6 @@ function App() {
 
    function onClose(idCharacter) {
       dispatch(removeWanted(idCharacter));
-      setCharactersWanted(charactersWanted.filter((character) => character.id !== parseInt(idCharacter,10)))      
    }
 
    return (
@@ -51,7 +48,6 @@ function App() {
          {(pathname!=="/")
             ? <NavBar onSearch = {onSearch}
                       pathname = {pathname}
-                      charactersWanted = {charactersWanted}
                /> 
             : ""         
          }
@@ -63,8 +59,7 @@ function App() {
 
             <Route exact path = "/home"                   
                    element    = {<Cards
-                                    onClose          = {onClose}
-                                    charactersWanted = {charactersWanted} />}>
+                                    onClose = {onClose}/>}>
             </Route>           
            
             <Route exact path = "/about"

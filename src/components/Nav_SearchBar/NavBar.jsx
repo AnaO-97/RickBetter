@@ -33,7 +33,7 @@ export default function NavBar (props){
 
     const  handleOrder = (evento) => {        
         const { value } = evento.target;
-        dispatch(oderCards(value));
+        dispatch(oderCards(value, pathname));
     }
     
     const  handleFilter = (evento) => {
@@ -69,8 +69,9 @@ export default function NavBar (props){
                 <select name     = "Order"
                         onChange = { handleOrder }
                 >
-                    <option value = "A"> Upward  </option>
-                    <option value = "B"> Falling </option>
+                    <option value = "N/A"> N/A  </option>
+                    <option value = "Upward"> Upward  </option>
+                    <option value = "Falling"> Falling </option>
                 </select>
             </div>
             

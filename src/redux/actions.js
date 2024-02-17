@@ -38,13 +38,13 @@ export function removeFav (id){
 export function filterCards (gender, pathname){
     return({
         type    : FILTER,
-        payload : [gender,pathname]
+        payload : [ gender,pathname ]
     });
 }
 
-export function oderCards  (order){    
+export function oderCards  (order, pathname){    
     return({
         type:    ORDER,
-        payload: order
+        payload: [ order, pathname ]
     });
 }

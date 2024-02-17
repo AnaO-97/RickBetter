@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import style from './Cards.module.css'
@@ -7,8 +6,7 @@ export default function Cards(props) {
    const charactersWanted = useSelector((state)=>state.charactersWanted);
 
    return (      
-      <div className = {style.contenedorCards}
-      >
+      <div className = {style.contenedorCards}>
          {charactersWanted.length && 
             charactersWanted.map((personaje)=>
                (                  
