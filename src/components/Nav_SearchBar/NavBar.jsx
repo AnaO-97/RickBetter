@@ -21,7 +21,7 @@ export default function NavBar (props){
 
     const optionsSelects = ()=>{
         let auxiliary = []
-        let optionsRaw = [];
+        let optionsRaw = [];        
         if(characters.length > 0){
             characters.forEach((character)=>{                
                 optionsRaw.push(character.gender);
@@ -42,7 +42,9 @@ export default function NavBar (props){
     }
 
     useEffect(()=>{        
-        optionsSelects();
+        if(pathname === "/home" || pathname === "/favorites"){
+            optionsSelects();
+        }
     },[pathname, characters])
 
     return (

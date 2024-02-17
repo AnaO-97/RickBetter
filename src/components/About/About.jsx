@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function About (props){
     return(
-    <div>        
-        <br />
-
+    <div>                
         <div id="Imgn">
             <img id  = "Foto" 
                  src = {foto}
@@ -22,13 +20,5 @@ export default function About (props){
         <p>Colombia</p>
         <p>Ingeniera Biomédica</p>
         <p>Universidad Autónoma de Manizales</p>
-
-        <div>
-            <Link to="/home">
-                <button>GO BACK!</button>
-            </Link>
-        </div>
-
-    </div>
-    );
+    </div>);
 }
