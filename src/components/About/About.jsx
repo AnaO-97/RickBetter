@@ -8,16 +8,17 @@ export default function About (){
         <div className = { styles.ImgnPicture }>
             <h3> Ana María Orozco </h3>        
             <img src = {foto}/>
+            <h5>Stack MERN</h5>
         </div> 
 
         <div className = { styles.information }>
             <div className = { styles.containerA }>
-                <h3>Ingeniera Biomédica</h3>
-                <h3>Universidad Autónoma de Manizales</h3>
-                <h3>Colombia</h3>
-                <h3>Developer Full Stack</h3>
-                <h3>BootCamp Henry</h3>
-                <h3>Argentina</h3>
+                <h5>Ingeniera Biomédica</h5>
+                <h5>Universidad Autónoma de Manizales</h5>
+                <h5>Colombia</h5>
+                <h5>Developer Full Stack</h5>
+                <h5>BootCamp Henry</h5>
+                <h5>Argentina</h5>
             </div>
             <div className = { styles.containerB }>
                 <img src = "/IESOG.png" alt = "Error" />
