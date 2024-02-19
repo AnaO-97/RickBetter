@@ -1,0 +1,69 @@
+.containerGeneral{
+    height: 70%;
+    width: 80%;
+    margin-left: 130px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.containerGeneral h3{
+    color: black;
+    text-shadow: 2px 2px 2px #13a82c;
+    -webkit-text-stroke-width: 0.3px;
+    -webkit-text-stroke-color: black;
+    margin: 0;    
+}
+
+.containerGeneral .ImgnPicture{
+    width: 45%;
+    display: flex;
+    font-family: Vivaldi;
+    font-size: 55px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.containerGeneral .ImgnPicture img{
+    width: 200px;
+    height: 250px;
+    border: solid 2px black;
+    border-radius: 50%;
+    box-shadow: 6px 6px 15px #13a82cb4; 
+}
+
+.containerGeneral .information{
+    width: 40%;
+    padding: 10px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 5px solid black;
+    border-top: 5px solid black;
+    border-radius: 20px;
+    background-image: linear-gradient(15deg, #13547a71 0%, #80d0c765 100%);
+}
+
+.containerGeneral .information .containerA{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.containerGeneral .information .containerB{
+    width: 100%;
+    display: flex;
+    justify-content: center;  
+}
+
+.containerGeneral .information .containerB img{
+    width: 50px;
+    height: 50px;    
+    margin: 10px;
+}
